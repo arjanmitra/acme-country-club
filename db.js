@@ -1,6 +1,8 @@
 const { Sequelize, DataTypes, UUID, UUIDV4, STRING } = require('sequelize');
 
-const db = new Sequelize('postgres://localhost/acme-country-club');
+const db = new Sequelize(
+  process.env.DATABASE_URL || 'postgres://localhost/acme-country-club'
+);
 
 const Facility = db.define('facility', {
   id: {
@@ -100,5 +102,8 @@ const syncAndSeed = async () => {
 };
 
 module.exports = {
-    db, Sequelize, syncAndSeed, models: { Facility, Member, Booking}
-}
+  db,
+  Sequelize,
+  syncAndSeed,
+  models: { Facility, Member, Booking },
+};
